@@ -1,0 +1,941 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta name="viewport" content="user-scalable=0" />
+	<meta name="ad.orientation" content="portrait">
+	<meta name="ad.size" content="width=320,height=480">
+	<!-- <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover"> -->
+	<style>
+		html,
+		body {
+			display: block;
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			font-family: Helvetica, sans-serif;
+			touch-action: manipulation;
+			-webkit-touch-callout: none;
+			-webkit-tap-highlight-color: transparent;
+			/* background-color: white; */
+			background-size: 100% 100%;
+			box-sizing: border-box;
+			/* background-image: url('assets/bg.jpg'); */
+			background-size: cover;
+			background-position: center top;
+			background: rgb(255, 255, 255);
+			background: linear-gradient(0deg, rgba(255, 255, 255, 1) 35%, rgba(120, 190, 230, 1) 100%);
+		}
+
+		#container {
+			position: relative;
+			left: 0px;
+			top: 0px;
+			cursor: pointer;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		#main_container {
+			position: relative;
+			left: 50%;
+			top: 32%;
+			cursor: pointer;
+			/* width: 100%; */
+			width: 1109px;
+			/* height: 100%; */
+			height: 1950px;
+			transform: translate(-50%, -50%);
+			z-index: 1;
+		}
+
+		.element {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: auto;
+			background-size: 100% auto;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+
+		.hide {
+			opacity: 0;
+		}
+
+		.paused {
+			-webkit-animation-play-state: paused;
+			-moz-animation-play-state: paused;
+			-o-animation-play-state: paused;
+			animation-play-state: paused;
+		}
+
+		/* PERMANENT ASSETS */
+		#logo {
+			width: 100%;
+			max-width: 864px;
+			height: auto;
+			max-height: 323px;
+			margin-top: 10%;
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			position: relative;
+			z-index: 999999;
+			top: 10%;
+		}
+
+		/* @media only screen and (orientation: landscape) {
+				#logo {
+					width: 35vW;
+				}
+				#bgVig {
+					display:none;
+				}
+			} */
+		#clouds {
+			width: auto;
+			max-width: 3616px;
+			height: 100vH;
+			max-height: 1950px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			display: block;
+			transform: translate(-50%, -50%);
+		}
+
+		#cloudsBottom {
+			width: auto;
+			max-width: 4677px;
+			height: 100vH;
+			max-height: 1950px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			display: block;
+			transform: translate(-50%, -50%);
+		}
+
+		#cloudsFront {
+			width: 100%;
+			max-width: 980px;
+			height: auto;
+			max-height: 556px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			display: block;
+			transform: translate(-50%, -50%);
+		}
+
+		#stars {
+			width: auto;
+			max-width: 1109px;
+			height: 100vH;
+			max-height: 1950px;
+			position: absolute;
+			left: 50%;
+			top: 45%;
+			z-index: 1;
+			display: block;
+			transform: translate(-50%, -50%);
+		}
+
+		#bgVig {
+			width: 100%;
+			/* max-width: 1109px; */
+			height: 100%;
+			/* max-height: 1950px; */
+			position: absolute;
+			left: 50%;
+			top: 45%;
+			z-index: 1;
+			display: block;
+			transform: translate(-50%, -50%);
+		}
+
+		#textbox1,
+		#textbox2 {
+			width: 100%;
+			max-width: 846px;
+			height: auto;
+			max-height: 227px;
+			display: none;
+			position: absolute;
+			z-index: 6 !important;
+			top: auto;
+			bottom: 5%;
+			left: auto;
+			right: 12%;
+		}
+
+		#textbox3 {
+			width: 100%;
+			max-width: 577px;
+			height: auto;
+			max-height: 327px;
+			display: block;
+			position: absolute;
+			z-index: 4 !important;
+			top: 23%;
+			/* bottom: -169px; */
+			left: auto;
+			right: 30px;
+		}
+
+		#textbox4 {
+			width: 100%;
+			max-width: 527px;
+			height: auto;
+			max-height: 180px;
+			display: block;
+			position: absolute;
+			z-index: 4 !important;
+			top: 26%;
+			/* bottom: -169px; */
+			left: auto;
+			right: 5%;
+		}
+
+		#textbox5 {
+			width: 100%;
+			max-width: 527px;
+			height: auto;
+			max-height: 262px;
+			display: block;
+			position: absolute;
+			z-index: 4 !important;
+			top: 23%;
+			/* bottom: -169px; */
+			left: auto;
+			right: 30px;
+		}
+
+		#textbox6 {
+			width: 100%;
+			max-width: 527px;
+			height: auto;
+			max-height: 262px;
+			display: block;
+			position: absolute;
+			z-index: 4 !important;
+			top: 23%;
+			/* bottom: -169px; */
+			left: auto;
+			right: 30px;
+		}
+
+		#textbox7 {
+			width: 100%;
+			max-width: 527px;
+			height: auto;
+			max-height: 262px;
+			display: block;
+			position: absolute;
+			z-index: 4 !important;
+			top: 23%;
+			/* bottom: -169px; */
+			left: auto;
+			right: 30px;
+		}
+
+		#cta {
+			width: 100%;
+			max-width: 963px;
+			height: auto;
+			max-height: 332px;
+			display: none;
+			position: absolute;
+			z-index: 9 !important;
+			top: 54%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#islandContainer {
+			position: relative;
+			display: block;
+			width: 100%;
+			max-width: 1109px;
+			height: auto;
+			max-height: 1950px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 0;
+			/* top: -420px; */
+		}
+
+		#island {
+			position: relative;
+			display: block;
+			width: 100%;
+			max-width: 1109px;
+			height: auto;
+			max-height: 1950px;
+			z-index: 5 !important;
+			/* margin-left: auto; */
+			/* margin-right: auto; */
+			/* margin-top: 40vH; */
+		}
+
+		#islandEnd {
+			position: absolute;
+			display: block;
+			width: 100%;
+			max-width: 1109px;
+			height: auto;
+			max-height: 1950px;
+			z-index: 5 !important;
+			top: 0;
+			left: 0;
+			/* margin-left: auto; */
+			/* margin-right: auto; */
+			/* margin-top: 40vH; */
+		}
+
+		#firstDragonA,
+		#firstDragonB,
+		#firstDragonC,
+		#firstDragonD,
+		#firstEggs,
+		#mainEggPile {
+			position: absolute;
+			display: block;
+			width: 100%;
+			max-width: 1109px;
+			height: auto;
+			max-height: 1950px;
+			z-index: 5 !important;
+			top: 0px;
+			/* margin-left: auto; */
+			/* margin-right: auto; */
+			/* margin-top: 40vH; */
+		}
+
+		#mainEggPile {
+			display: none;
+		}
+
+		#eggContainer {
+			position: absolute;
+			display: none;
+			width: 100%;
+			max-width: 105px;
+			height: auto;
+			max-height: 128px;
+			z-index: 6 !important;
+			top: 66%;
+			left: 16%;
+		}
+
+		#flagContainer {
+			position: absolute;
+			display: none;
+			width: 100%;
+			max-width: 264px;
+			height: auto;
+			max-height: 284px;
+			z-index: 6 !important;
+			top: 72%;
+			left: 33%;
+		}
+
+		#treesContainer {
+			position: absolute;
+			display: none;
+			width: 100%;
+			max-width: 439px;
+			height: auto;
+			max-height: 495px;
+			z-index: 6 !important;
+			top: 44%;
+			left: 63%;
+		}
+
+		#treesBig {
+			display: none;
+		}
+
+		#handContainer1 {
+			position: absolute;
+			display: block;
+			width: 25%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			top: 70%;
+			left: 18%;
+		}
+
+		#handContainer2 {
+			position: absolute;
+			display: none;
+			width: 25%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			top: 77%;
+			left: 41%;
+		}
+
+		#handContainer3,
+		#handContainer4 {
+			position: absolute;
+			display: none;
+			width: 25%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			top: 62%;
+			left: 76%;
+		}
+
+		#handContainer5 {
+			position: absolute;
+			display: none;
+			width: 25%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			top: 49%;
+			left: 45%;
+		}
+
+		#handContainer6 {
+			position: absolute;
+			display: none;
+			width: 25%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			top: 49%;
+			left: 45%;
+		}
+
+		#star {
+			position: absolute;
+			display: none;
+			width: 95%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			top: 10%;
+			left: 30%;
+		}
+
+		#dragonChild,
+		#dragon {
+			position: absolute;
+			display: none;
+			width: 95%;
+			max-width: 673px;
+			height: auto;
+			max-height: 686px;
+			z-index: 6 !important;
+			top: 29%;
+			left: 19%;
+			overflow: hidden;
+			transform: scale(0.6);
+		}
+
+		#meterContainer {
+			position: relative;
+			display: none;
+			width: 69%;
+			max-width: 774px;
+			height: auto;
+			max-height: 299px;
+			z-index: 7 !important;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: -27px;
+			/* overflow: hidden; */
+		}
+
+		#food {
+			position: absolute;
+			display: none;
+			width: 95%;
+			max-width: 99px;
+			height: auto;
+			max-height: 91px;
+			z-index: 6 !important;
+			top: 44%;
+			left: 36%;
+		}
+
+		#finalVig {
+			display: none;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(circle, rgba(171, 153, 189, 0) 0%, rgba(41, 34, 59, 1) 80%, rgba(41, 34, 59, 1) 100%);
+			z-index: 1;
+		}
+
+		#finalVig2 {
+			display: none;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(circle, rgba(171, 153, 189, 0) 0%, rgba(41, 34, 59, 1) 80%, rgba(41, 34, 59, 1) 100%);
+			z-index: 5;
+		}
+
+		#starTrees {
+			position: absolute;
+			display: none;
+			width: 95%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			left: 61%;
+			top: 46%;
+		}
+
+		#starDragon {
+			position: absolute;
+			display: none;
+			width: 95%;
+			max-width: 477px;
+			height: auto;
+			max-height: 459px;
+			z-index: 6 !important;
+			left: 27%;
+			top: 36%;
+		}
+
+		#star1,
+		#star2,
+		#star3,
+		#star4,
+		#star5 {
+			position: absolute;
+			display: none;
+			width: 100%;
+			max-width: 55px;
+			height: auto;
+			max-height: 55px;
+			z-index: 6 !important;
+			left: 18%;
+			top: 68%;
+		}
+
+		#star6,
+		#star7,
+		#star8,
+		#star9,
+		#star10 {
+			position: absolute;
+			display: none;
+			width: 100%;
+			max-width: 55px;
+			height: auto;
+			max-height: 55px;
+			z-index: 6 !important;
+			left: 42%;
+			top: 77%;
+		}
+
+		#star11,
+		#star12,
+		#star13,
+		#star14,
+		#star15 {
+			position: absolute;
+			display: none;
+			width: 100%;
+			max-width: 100px;
+			height: auto;
+			max-height: 100px;
+			z-index: 6 !important;
+			left: 77%;
+			top: 58%;
+		}
+
+		#sky {
+			position: absolute;
+			height: 40vH;
+			width: 100vW;
+			top: 0px;
+			left: 0px;
+			overflow: hidden;
+		}
+
+		#purple {
+			background: linear-gradient(0deg, rgba(171, 153, 189, 1) 35%, rgba(41, 34, 59, 1) 100%);
+			width: 100%;
+			height: 100%;
+			z-index: 0 !important;
+			/* opacity: 0.7; */
+		}
+
+		.star {
+			position: absolute;
+			width: 2px;
+			height: 2px;
+			border-radius: 2px;
+			background: white;
+		}
+
+		@media only screen and (max-width: 1000px) {
+			.star {
+				width: 5px;
+				height: 5px;
+				border-radius: 5px;
+			}
+		}
+
+		#blueCrystal {
+			position: absolute;
+			display: block;
+			width: 100%;
+			max-width: 106px;
+			height: auto;
+			max-height: 67px;
+			z-index: 5 !important;
+			left: 44%;
+			top: 54%;
+		}
+
+		#redCrystal {
+			position: absolute;
+			display: block;
+			width: 100%;
+			max-width: 86px;
+			height: auto;
+			max-height: 66px;
+			z-index: 5 !important;
+			left: 14%;
+			top: 34%;
+		}
+
+		#purpleCrystal {
+			position: absolute;
+			display: block;
+			width: 100%;
+			max-width: 66px;
+			height: auto;
+			max-height: 73px;
+			z-index: 5 !important;
+			left: 75%;
+			top: 66%;
+		}
+
+		#btnCTA {
+			z-index: 5000000000000;
+			width: 0;
+			height: 0;
+			position: absolute;
+			opacity: 0;
+		}
+	</style>
+	<script type="text/javascript"
+		src="https://tpc.googlesyndication.com/pagead/gadgets/html5/api/exitapi.js"> </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.19.1_92cf05aba6ca4ea5cbc62b5a7cb924e3_min.js"></script>
+
+	<script>
+		function getScript(e, i) {
+			var n = document.createElement("script");
+			n.type = "text/javascript", n.async = !0, i && (n.onload = i), n.src = e, document.head.appendChild(n)
+		}
+
+		function parseMessage(e) {
+			var i = e.data,
+				n = i.indexOf(DOLLAR_PREFIX + RECEIVE_MSG_PREFIX);
+			if (-1 !== n) {
+				var t = i.slice(n + 2);
+				return getMessageParams(t)
+			}
+			return {}
+		}
+
+		function getMessageParams(e) {
+			var i, n = [],
+				t = e.split("/"),
+				a = t.length;
+			if (-1 === e.indexOf(RECEIVE_MSG_PREFIX)) {
+				if (a >= 2 && a % 2 === 0)
+					for (i = 0; a > i; i += 2) n[t[i]] = t.length < i + 1 ? null : decodeURIComponent(t[i + 1])
+			} else {
+				var o = e.split(RECEIVE_MSG_PREFIX);
+				void 0 !== o[1] && (n = JSON && JSON.parse(o[1]))
+			}
+			return n
+		}
+
+		function getDapi(e) {
+			var i = parseMessage(e);
+			if (!i || i.name === GET_DAPI_URL_MSG_NAME) {
+				var n = i.data;
+				getScript(n, onDapiReceived)
+			}
+		}
+
+		function invokeDapiListeners() {
+			for (var e in dapiEventsPool) dapiEventsPool.hasOwnProperty(e) && dapi.addEventListener(e, dapiEventsPool[e])
+		}
+
+		function onDapiReceived() {
+			dapi = window.dapi, window.removeEventListener("message", getDapi), invokeDapiListeners()
+		}
+
+		function init() {
+			window.dapi.isDemoDapi && (window.parent.postMessage(DOLLAR_PREFIX + SEND_MSG_PREFIX + JSON.stringify({
+				state: "getDapiUrl"
+			}), "*"), window.addEventListener("message", getDapi, !1))
+		}
+		var DOLLAR_PREFIX = "$$",
+			RECEIVE_MSG_PREFIX = "DAPI_SERVICE:",
+			SEND_MSG_PREFIX = "DAPI_AD:",
+			GET_DAPI_URL_MSG_NAME = "connection.getDapiUrl",
+			dapiEventsPool = {},
+			dapi = window.dapi || {
+				isReady: function () {
+					return !1
+				},
+				addEventListener: function (e, i) {
+					dapiEventsPool[e] = i
+				},
+				removeEventListener: function (e) {
+					delete dapiEventsPool[e]
+				},
+				isDemoDapi: !0
+			};
+		init();
+	</script>
+
+</head>
+
+<body>
+	<div id="container">
+		<div id="purple" class="element hide"></div>
+		<!-- Background ELEMENTS -->
+		<div id="sky"></div>
+		<img id="clouds" class="element" src="assets/clouds.png">
+		<img id="cloudsBottom" class="element" src="assets/cloudsBottom.png">
+		<div id="finalVig" class="element hide"></div>
+		<div id="main_container">
+
+			<!-- Permanet Assets TOP LAYER -->
+			<img id="logo" class="hide" src="assets/logo.png">
+
+			<!-- MAIN CONTAINER -->
+			<!-- Screen 1 -->
+
+			<div id="islandContainer">
+				<img id="island" class="hide" src="assets/island.png">
+				<img id="blueCrystal" class="" src="assets/blueCrystal.png">
+				<img id="redCrystal" class="" src="assets/redCrystal.png">
+				<img id="purpleCrystal" class="" src="assets/purpleCrystal.png">
+				<img id="islandEnd" class="hide" src="assets/islandEnd.png">
+				<img id="firstDragonA" class="hide" src="assets/firstDragonA.png">
+				<img id="firstDragonB" class="hide" src="assets/firstDragonB.png">
+				<img id="firstDragonC" class="hide" src="assets/firstDragonC.png">
+				<img id="firstDragonD" class="hide" src="assets/firstDragonD.png">
+				<img id="firstEggs" class="hide" src="assets/firstEggs.png">
+				<img id="mainEggPile" class="hide" onclick="changeDecorOne()" src="assets/mainEggPile.png">
+				<img id="textbox1" onclick="startGame()" class="hide" src="assets/textbox1.png">
+				<img id="textbox2" class="hide" src="assets/textbox2.png">
+				<img id="textbox3" class="hide" src="assets/textbox3.png">
+				<img id="textbox4" class="hide" src="assets/textbox4.png">
+				<img id="textbox5" class="hide" src="assets/textbox5.png">
+				<img id="textbox6" class="hide" src="assets/textbox6.png">
+				<img id="textbox7" class="hide" src="assets/textbox7.png">
+
+
+				<div id="eggContainer" class="hide">
+					<img id="egg" class="element" src="assets/egg.png">
+				</div>
+				<div id="flagContainer" class="hide">
+					<img id="flag" class="element hide" src="assets/flag.png">
+					<img id="flagPlace" onclick="placeFlag()" class="element" src="assets/flagPlace.png">
+				</div>
+				<div id="treesContainer" class="hide">
+					<img id="trees" onclick="treesGrow()" class="element hide" src="assets/trees.png">
+					<img id="treesPlace" onclick="placeTrees()" class="element" src="assets/treesPlace.png">
+					<img id="treesBig" class="element hide" src="assets/treesBig.png">
+				</div>
+
+				<div id="dragonChild" class="hide" onclick="feedDragon()">
+					<img id="dragonChildSprite" class="" src="assets/dragonChildSprite.png">
+				</div>
+				<div id="dragon" class="hide" onclick="continueFeedDragon()">
+					<img id="dragonSprite" class="" src="assets/dragonSprite.png">
+				</div>
+				<!-- <img id="dragon" class="hide" onclick="feedDragonAgain()" src="assets/dragon.png" > -->
+				<img id="food" class="hide" src="assets/food.png">
+
+				<div id="handContainer1" class="hide" onclick="changeDecorOne()">
+					<img id="pointer1" class="element hide" src="assets/pointer.png">
+					<img id="hand1" class="element" src="assets/hand.png">
+				</div>
+				<div id="handContainer2" class="hide" onclick="placeFlag()">
+					<img id="pointer2" class="element hide" src="assets/pointer.png">
+					<img id="hand2" class="element" src="assets/hand.png">
+				</div>
+				<div id="handContainer3" class="hide" onclick="placeTrees()">
+					<img id="pointer3" class="element hide" src="assets/pointer.png">
+					<img id="hand3" class="element" src="assets/hand.png">
+				</div>
+				<div id="handContainer4" class="hide" onclick="treesGrow()">
+					<img id="pointer4" class="element hide" src="assets/pointer.png">
+					<img id="hand4" class="element" src="assets/hand.png">
+				</div>
+				<div id="handContainer5" class="hide" onclick="feedDragon()">
+					<img id="pointer5" class="element hide" src="assets/pointer.png">
+					<img id="hand5" class="element" src="assets/hand.png">
+				</div>
+				<div id="handContainer6" class="hide" onclick="continueFeedDragon()">
+					<img id="pointer6" class="element hide" src="assets/pointer.png">
+					<img id="hand6" class="element" src="assets/hand.png">
+				</div>
+				<img id="starTrees" class="element hide" src="assets/star.png">
+				<img id="starDragon" class="element hide" src="assets/star.png">
+
+				<img id="star1" class="element hide" src="assets/star.png">
+				<img id="star2" class="element hide" src="assets/star.png">
+				<img id="star3" class="element hide" src="assets/star.png">
+				<img id="star4" class="element hide" src="assets/star.png">
+				<img id="star5" class="element hide" src="assets/star.png">
+
+				<img id="star6" class="element hide" src="assets/star.png">
+				<img id="star7" class="element hide" src="assets/star.png">
+				<img id="star8" class="element hide" src="assets/star.png">
+				<img id="star9" class="element hide" src="assets/star.png">
+				<img id="star10" class="element hide" src="assets/star.png">
+
+				<img id="star11" class="element hide" src="assets/star.png">
+				<img id="star12" class="element hide" src="assets/star.png">
+				<img id="star13" class="element hide" src="assets/star.png">
+				<img id="star14" class="element hide" src="assets/star.png">
+				<img id="star15" class="element hide" src="assets/star.png">
+
+				<img id="cta" class="hide" onclick="openURL()" src="assets/cta.png">
+
+			</div>
+			<!-- <div id="finalVig2" class="element hide"></div> -->
+		</div>
+		<img id="cloudsFront" class="element" src="assets/cloudsFront.png">
+	</div>
+	<!-- <button id="btnCTA" onclick="openURL()">SSSSS</button> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+	<script>
+		var audioEnabled = null;
+
+		function openURL() {
+			var userAgent = navigator.userAgent || navigator.vendor;
+			var url = "https://apps.apple.com/us/app/dragonvale/id440045374";
+			var android =
+				"https://play.google.com/store/apps/details?id=com.backflipstudios.android.dragonvale&hl=en&gl=US";
+			if (/android/i.test(userAgent)) {
+				url = android;
+			}
+
+			dapi.openStoreUrl(url);
+		}
+
+		window.mobileCheck = function () {
+			let check = false;
+			(function (a) { if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true; })(navigator.userAgent || navigator.vendor || window.opera);
+			return check;
+		};
+
+		window.onload = function () {
+
+
+
+
+			window.audioEnabled = null;
+			(dapi.isReady()) ? onReadyCallback() : dapi.addEventListener("ready", onReadyCallback);
+
+			window.addEventListener("blur", pause);
+			window.addEventListener("focus", play);
+
+		};
+
+		console.log(window.mobileCheck(), " MObikle");
+
+		if (!window.mobileCheck()) {
+			document.getElementById("logo").style.top = "4%";
+			document.getElementById("islandContainer").style.top = "-420px";
+		}
+
+		function pause() {
+
+		}
+
+		function play() {
+
+		}
+
+		function onReadyCallback() {
+			dapi.removeEventListener("ready", onReadyCallback);
+			let isAudioEnabled = !!dapi.getAudioVolume();
+
+			if (dapi.isViewable()) {
+				adVisibleCallback({
+					isViewable: true
+				});
+			}
+			window.audioEnabled = isAudioEnabled;
+			if (isAudioEnabled) {
+
+
+			} else {
+
+			}
+
+			dapi.addEventListener("viewableChange", adVisibleCallback);
+			dapi.addEventListener("audioVolumeChange", audioVolumeChangeCallback);
+		}
+
+		function adVisibleCallback(event) {
+			console.log("isViewable " + event.isViewable);
+			if (event.isViewable) {
+				screenSize = dapi.getScreenSize();
+
+			} else {
+
+			}
+		}
+
+		function adResizeCallback(event) {
+			screenSize = event;
+
+		}
+
+		function userClickedDownloadButton(event) {
+			dapi.openStoreUrl();
+		}
+
+		function audioVolumeChangeCallback(volume) {
+			let isAudioEnabled = !!volume;
+			window.audioEnabled = isAudioEnabled;
+			if (isAudioEnabled) {
+
+			} else {
+
+			}
+		}
+	</script>
+
+	<script src="main.js" type="text/javascript"></script>
+</body>
+
+</html>
